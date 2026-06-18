@@ -130,59 +130,54 @@ export const photoCarouselItems = [
 
 export const videoReelItems = [
   {
-    src: "/videos/VID-20250630-WA0010.mp4",
+    src: "/videos/1.mp4",
     title: "Fiesta Malavida",
     ariaLabel: "Video vertical de Charanga Malavida en una fiesta"
   },
   {
-    src: "/videos/VID-20250630-WA0051.mp4",
+    src: "/videos/2.mp4",
     title: "Directo de calle",
     ariaLabel: "Video vertical de Charanga Malavida tocando en directo"
   },
   {
-    src: "/videos/VID-20250809-WA0003.mp4",
+    src: "/videos/3.mp4",
     title: "Pasacalles",
     ariaLabel: "Video vertical de pasacalles de Charanga Malavida"
   },
   {
-    src: "/videos/VID-20250809-WA0010.mp4",
+    src: "/videos/4.mp4",
     title: "Ambiente de plaza",
     ariaLabel: "Video vertical de Charanga Malavida animando una plaza"
   },
   {
-    src: "/videos/VID-20250819-WA0018.mp4",
+    src: "/videos/5.mp4",
     title: "Bodas y eventos",
     ariaLabel: "Video vertical de Charanga Malavida para bodas y eventos"
   },
   {
-    src: "/videos/VID-20250904-WA0005.mp4",
+    src: "/videos/6.mp4",
     title: "Musica en directo",
     ariaLabel: "Video vertical de musica en directo de Charanga Malavida"
   },
   {
-    src: "/videos/VID_20260616_051638_062.mp4",
+    src: "/videos/7.mp4",
     title: "Ritmo Malavida",
     ariaLabel: "Video vertical con ambiente festivo de Charanga Malavida"
   },
   {
-    src: "/videos/VID_20260616_051717_519.mp4",
+    src: "/videos/8.mp4",
     title: "Charanga en marcha",
     ariaLabel: "Video vertical de Charanga Malavida en movimiento"
   },
   {
-    src: "/videos/VID_20260616_051802_318.mp4",
+    src: "/videos/9.mp4",
     title: "Fiestas populares",
     ariaLabel: "Video vertical de Charanga Malavida en fiestas populares"
   },
   {
-    src: "/videos/VID_20260616_051842_580.mp4",
+    src: "/videos/10.mp4",
     title: "Peñas y calle",
     ariaLabel: "Video vertical de Charanga Malavida con peñas y calle"
-  },
-  {
-    src: "/videos/VID_20260616_051945_896.mp4",
-    title: "Directo Malavida",
-    ariaLabel: "Video vertical de directo de Charanga Malavida"
   }
 ];
 
