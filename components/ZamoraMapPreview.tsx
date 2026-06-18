@@ -1,7 +1,12 @@
+import dynamic from "next/dynamic";
 import { ArrowRight, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
-import { ZamoraMap } from "@/components/ZamoraMap";
 import { DisplayEventsResult } from "@/lib/events";
+
+const ZamoraMap = dynamic(
+  () => import("@/components/ZamoraMap").then((m) => m.ZamoraMap),
+  { ssr: false }
+);
 
 type ZamoraMapPreviewProps = {
   events: DisplayEventsResult["events"];
