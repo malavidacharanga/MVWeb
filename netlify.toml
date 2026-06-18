@@ -5,6 +5,12 @@
 [build.environment]
   SECRETS_SCAN_OMIT_KEYS = "GOOGLE_CALENDAR_ID"
 
+[[redirects]]
+  from = "http://stunning-torte-2347b4.netlify.app/*"
+  to = "https://stunning-torte-2347b4.netlify.app/:splat"
+  status = 301
+  force = true
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
