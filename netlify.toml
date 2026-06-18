@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = ".next"
 
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "GOOGLE_CALENDAR_ID"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
