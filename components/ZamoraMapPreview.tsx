@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { ArrowRight, MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/SectionHeading";
