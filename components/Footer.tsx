@@ -15,7 +15,7 @@ export function Footer() {
       <div className="container-shell flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="flex min-w-0 items-center gap-4">
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo.webp"
             alt="Charanga Malavida"
             width={78}
             height={78}

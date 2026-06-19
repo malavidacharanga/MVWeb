@@ -128,7 +128,7 @@ function createMarkerIcon(L: typeof import("leaflet")) {
       className: "mv-map-marker",
       html: `
         <span class="mv-map-pin">
-          <img src="/logo/logo.png" alt="" aria-hidden="true" />
+          <img src="/logo/logo.webp" alt="" aria-hidden="true" />
           ${count > 1 ? `<span class="mv-map-pin-count">${count}</span>` : ""}
         </span>
       `,

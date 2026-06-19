@@ -22,7 +22,7 @@ export function Header() {
       <div className="container-shell flex min-h-20 items-center justify-between gap-4">
         <Link className="flex items-center gap-3" href="/#inicio">
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo.webp"
             alt="Charanga Malavida"
             width={72}
             height={72}
