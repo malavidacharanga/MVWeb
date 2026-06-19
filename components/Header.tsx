@@ -26,6 +26,7 @@ export function Header() {
             alt="Charanga Malavida"
             width={72}
             height={72}
+            priority
             className="h-14 w-14 rounded-full border-[3px] border-[var(--mv-black)] bg-[var(--mv-white)] object-contain"
           />
           <span className="mv-display hidden text-2xl uppercase leading-none text-black sm:block">

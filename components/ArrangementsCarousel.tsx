@@ -52,7 +52,7 @@ export function ArrangementsCarousel() {
           key={activeArrangement.audioSrc}
           className="block w-full max-w-full"
           controls
-          preload="none"
+          preload="metadata"
           src={activeArrangement.audioSrc}
         >
           Tu navegador no puede reproducir este audio.
