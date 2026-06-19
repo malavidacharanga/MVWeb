@@ -10,9 +10,12 @@ import type { EventItem } from "@/lib/mock-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Agenda | Charanga Malavida",
+  title: "Agenda",
   description:
     "Consulta las proximas actuaciones de Charanga Malavida, charanga en Zamora para fiestas populares, pasacalles, bodas y musica en directo.",
+  alternates: {
+    canonical: "/agenda"
+  },
   openGraph: {
     title: "Agenda | Charanga Malavida",
     description:

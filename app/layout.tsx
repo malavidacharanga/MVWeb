@@ -10,6 +10,17 @@ export const metadata: Metadata = {
   },
   description:
     "Charanga Malavida lleva música en directo, pasacalles y ambiente festivo a fiestas, bodas y eventos en Zamora.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  },
   openGraph: {
     title: "Charanga Malavida",
     description:

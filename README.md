@@ -116,6 +116,22 @@ RESEND_FROM_EMAIL=
 
 Los botones directos de WhatsApp y email se mantienen como alternativa de contacto.
 
+## SEO tecnico
+
+Next.js genera automaticamente estas rutas de metadata:
+
+- `/sitemap.xml`: incluye la home y `/agenda`.
+- `/robots.txt`: permite el rastreo y referencia el sitemap.
+
+La home y la agenda tienen canonical propio. El metadata global permite
+`index, follow` para buscadores y Googlebot.
+
+En Google Search Console se debe enviar:
+
+```bash
+https://charangamalavida.es/sitemap.xml
+```
+
 ## Siguientes fases
 
 1. Revisar permisos del calendario para que los eventos publicos muestren titulo, ubicacion y descripcion completos.
@@ -123,4 +139,4 @@ Los botones directos de WhatsApp y email se mantienen como alternativa de contac
 3. Evolucionar `/agenda` a FullCalendar si hace falta una vista mensual interactiva.
 4. Crear paginas individuales `/actuaciones/[slug]`.
 5. Añadir proteccion anti-spam al formulario con Turnstile si hace falta.
-6. Generar `robots.txt`, `sitemap.xml` y JSON-LD `Event`.
+6. Generar JSON-LD `Event` para las actuaciones cuando existan paginas individuales.

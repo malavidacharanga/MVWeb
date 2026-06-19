@@ -14,9 +14,14 @@ import { siteConfig } from "@/lib/mock-data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Charanga Malavida | Charanga en Zamora y Castilla y León",
+  title: {
+    absolute: "Charanga Malavida | Charanga en Zamora y Castilla y León"
+  },
   description:
     "Música en directo para fiestas populares, pasacalles, bodas y eventos. Charanga Malavida actúa en Zamora, Castilla y León y alrededores.",
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
     title: "Charanga Malavida | Charanga en Zamora y Castilla y León",
     description:
