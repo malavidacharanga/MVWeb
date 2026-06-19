@@ -7,7 +7,7 @@ import { getDisplayEvents } from "@/lib/events";
 import { siteConfig } from "@/lib/mock-data";
 import type { EventItem } from "@/lib/mock-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Agenda",

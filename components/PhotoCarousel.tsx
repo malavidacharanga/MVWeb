@@ -9,7 +9,7 @@ import {
   Music4,
   Youtube
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { photoCarouselItems, siteConfig } from "@/lib/mock-data";
 
 const AUTOPLAY_MS = 4200;
@@ -23,10 +23,33 @@ const socialIcons = {
 export function PhotoCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isNearViewport, setIsNearViewport] = useState(false);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
   const total = photoCarouselItems.length;
 
   useEffect(() => {
-    if (isPaused || total <= 1) {
+    const element = carouselRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setIsNearViewport(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearViewport(entry.isIntersecting),
+      { rootMargin: "250px 0px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isNearViewport || isPaused || total <= 1) {
       return;
     }
 
@@ -35,7 +58,7 @@ export function PhotoCarousel() {
     }, AUTOPLAY_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [activeIndex, isPaused, total]);
+  }, [activeIndex, isNearViewport, isPaused, total]);
 
   function goToPrevious() {
     setActiveIndex((current) => (current - 1 + total) % total);
@@ -49,8 +72,15 @@ export function PhotoCarousel() {
     setActiveIndex(index);
   }
 
+  if (total === 0) {
+    return null;
+  }
+
+  const activePhoto = photoCarouselItems[activeIndex];
+
   return (
     <div
+      ref={carouselRef}
       className="relative flex h-full flex-col overflow-hidden bg-[var(--mv-black)]"
       onBlur={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
@@ -58,27 +88,16 @@ export function PhotoCarousel() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="relative aspect-[4/3] min-h-[280px] shrink-0 sm:aspect-[16/10] lg:min-h-[430px]">
-        <div
-          className="flex h-full transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-        >
-          {photoCarouselItems.map((photo, index) => (
-            <div
-              key={photo.src}
-              className="relative h-full w-full shrink-0"
-              aria-hidden={index !== activeIndex}
-            >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                priority={index === 0}
-                sizes="(min-width: 1024px) 680px, calc(100vw - 32px)"
-                className="object-cover"
-              />
-            </div>
-          ))}
-        </div>
+        <Image
+          key={activePhoto.src}
+          src={activePhoto.src}
+          alt={activePhoto.alt}
+          fill
+          loading="lazy"
+          quality={75}
+          sizes="(min-width: 1024px) 680px, calc(100vw - 32px)"
+          className="object-cover"
+        />
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/80 to-transparent" />
 

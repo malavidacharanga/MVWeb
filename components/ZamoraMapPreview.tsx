@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { ArrowRight, MapPin } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { DisplayEventsResult } from "@/lib/events";
 
@@ -17,6 +18,34 @@ type ZamoraMapPreviewProps = {
 
 export function ZamoraMapPreview({ events, mode }: ZamoraMapPreviewProps) {
   const isPastFallback = mode === "past";
+  const mapHostRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+
+  useEffect(() => {
+    const element = mapHostRef.current;
+
+    if (!element || shouldLoadMap) {
+      return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadMap(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [shouldLoadMap]);
 
   return (
     <section id="mapa" className="section-band bg-[var(--mv-white)]">
@@ -47,7 +76,10 @@ export function ZamoraMapPreview({ events, mode }: ZamoraMapPreviewProps) {
           </a>
         </div>
 
-        <div className="mv-sticker overflow-hidden bg-[var(--mv-paper)]">
+        <div
+          ref={mapHostRef}
+          className="mv-sticker overflow-hidden bg-[var(--mv-paper)]"
+        >
           <div className="flex items-center justify-between gap-3 border-b-[3px] border-[var(--mv-black)] bg-[var(--mv-pink)] px-4 py-3 text-black sm:px-5">
             <p className="flex items-center gap-2 text-xs font-black uppercase sm:text-sm">
               <MapPin aria-hidden="true" size={18} />
@@ -57,7 +89,21 @@ export function ZamoraMapPreview({ events, mode }: ZamoraMapPreviewProps) {
               {events.length} {events.length === 1 ? "fecha" : "fechas"}
             </p>
           </div>
-          <ZamoraMap events={events} />
+          {shouldLoadMap ? (
+            <ZamoraMap events={events} />
+          ) : (
+            <div
+              className="grid h-[390px] min-h-[340px] w-full place-items-center bg-[var(--mv-paper)] sm:h-[480px] lg:h-[560px]"
+              role="status"
+              aria-label="El mapa se cargara al acercarse a esta seccion"
+            >
+              <MapPin
+                aria-hidden="true"
+                className="text-[var(--mv-pink-dark)]"
+                size={42}
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>

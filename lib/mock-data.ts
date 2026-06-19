@@ -211,7 +211,7 @@ export const arrangements: ArrangementItem[] = [
   },
   {
     title: "Verbena Heroína",
-    audioSrc: "/arreglos/verbena/Verbena%20%28mp3cut.net%29.mp3",
+    audioSrc: "/arreglos/verbena/Verbena%20(mp3cut.net).mp3",
     description: "Arreglo festivo para repertorio de verbena y pasacalles."
   }
 ];

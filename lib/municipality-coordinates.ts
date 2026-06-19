@@ -1,4 +1,4 @@
-import municipiosData from "@/lib/registro-de-municipios-de-castilla-y-leon.json";
+import municipiosData from "@/lib/municipality-coordinate-index.json";
 
 export type Coordinates = {
   lat: number;

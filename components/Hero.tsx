@@ -26,11 +26,12 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 h-4 bg-[var(--mv-pink)]" />
       <div className="absolute bottom-0 left-0 h-4 w-full bg-[var(--mv-pink)]" />
       <Image
-        src="/logo/logo.png"
+        src="/logo/logo.webp"
         alt=""
-        width={1000}
-        height={1000}
+        width={400}
+        height={400}
         priority
+        unoptimized
         aria-hidden="true"
         className="pointer-events-none absolute right-0 top-12 hidden w-[44vw] max-w-[520px] rounded-full opacity-20 lg:block"
       />
@@ -38,11 +39,12 @@ export function Hero() {
       <div className="container-shell relative flex min-h-[78svh] flex-col justify-center gap-6 py-12 sm:gap-8 md:min-h-[82svh] md:py-16">
         <div className="flex flex-col gap-6 lg:max-w-4xl">
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo.webp"
             alt="Logo de Charanga Malavida"
-            width={420}
-            height={420}
+            width={400}
+            height={400}
             priority
+            unoptimized
             className="h-auto w-36 rounded-full border-[4px] border-[var(--mv-white)] bg-[var(--mv-white)] object-contain shadow-[6px_6px_0_var(--mv-pink)] sm:w-48 md:w-64"
           />
 

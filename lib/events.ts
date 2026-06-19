@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { EventItem, getUpcomingEvents, mockEvents } from "@/lib/mock-data";
 import {
   getMunicipalityForPlace,
@@ -41,6 +42,22 @@ type GoogleCalendarResponse = {
 const DISPLAY_TIME_ZONE = "Europe/Madrid";
 const MAX_DISPLAY_EVENTS = 3;
 const MAX_CALENDAR_RESULTS = 50;
+const EVENTS_REVALIDATE_SECONDS = 300;
+
+const getCachedCalendarEvents = unstable_cache(
+  async (direction: "upcoming" | "past") => {
+    const calendarId = process.env.GOOGLE_CALENDAR_ID;
+    const apiKey = process.env.GOOGLE_CALENDAR_API_KEY;
+
+    if (!calendarId || !apiKey) {
+      throw new Error("Faltan GOOGLE_CALENDAR_ID o GOOGLE_CALENDAR_API_KEY.");
+    }
+
+    return fetchCalendarEvents({ calendarId, apiKey, direction });
+  },
+  ["google-calendar-events-v2"],
+  { revalidate: EVENTS_REVALIDATE_SECONDS }
+);
 
 export async function getDisplayEvents(
   limit = MAX_DISPLAY_EVENTS
@@ -56,12 +73,7 @@ export async function getDisplayEvents(
   }
 
   try {
-    const upcoming = await fetchCalendarEvents({
-      calendarId,
-      apiKey,
-      direction: "upcoming",
-      limit
-    });
+    const upcoming = await getCachedCalendarEvents("upcoming");
 
     if (upcoming.length > 0) {
       return {
@@ -72,12 +84,7 @@ export async function getDisplayEvents(
       };
     }
 
-    const past = await fetchCalendarEvents({
-      calendarId,
-      apiKey,
-      direction: "past",
-      limit
-    });
+    const past = await getCachedCalendarEvents("past");
 
     if (past.length > 0) {
       return {
@@ -120,13 +127,11 @@ function getMockResult(
 async function fetchCalendarEvents({
   calendarId,
   apiKey,
-  direction,
-  limit
+  direction
 }: {
   calendarId: string;
   apiKey: string;
   direction: "upcoming" | "past";
-  limit: number;
 }) {
   const now = new Date();
   const url = new URL(
@@ -141,7 +146,7 @@ async function fetchCalendarEvents({
   url.searchParams.set("timeZone", DISPLAY_TIME_ZONE);
   url.searchParams.set(
     "maxResults",
-    String(Math.min(MAX_CALENDAR_RESULTS, Math.max(limit, 20)))
+    String(MAX_CALENDAR_RESULTS)
   );
 
   if (direction === "upcoming") {
@@ -156,9 +161,7 @@ async function fetchCalendarEvents({
     url.searchParams.set("timeMax", now.toISOString());
   }
 
-  const response = await fetch(url, {
-    next: { revalidate: 300 }
-  });
+  const response = await fetch(url, { cache: "no-store" });
   const data = (await response.json()) as GoogleCalendarResponse;
 
   if (!response.ok) {
