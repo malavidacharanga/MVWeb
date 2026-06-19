@@ -88,7 +88,7 @@ export function VideoReelCarousel() {
                 loop
                 muted={isMuted}
                 playsInline
-                preload={index === activeIndex ? "auto" : "metadata"}
+                preload={index === activeIndex ? "auto" : "none"}
                 src={video.src}
               />
             </div>
